@@ -1,7 +1,7 @@
 # API app-intercambio
 
 ```
-URL Producción: http://janiserver.servehttp.com:8080/app-intercambio/
+URL Producción: http://intercambioapp.azurewebsites.net/
 ```
 
 ## Identificar usuario [POST]
