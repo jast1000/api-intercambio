@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="intercambioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="intercambioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Asistencia" EntityType="intercambioModel.Asistencia" />
+    <EntitySet Name="Participantes" EntityType="intercambioModel.Participantes" />
+    <EntitySet Name="plantilla_correo" EntityType="intercambioModel.plantilla_correo" />
+    <EntitySet Name="Reglas" EntityType="intercambioModel.Reglas" />
+    <EntitySet Name="Sorteo" EntityType="intercambioModel.Sorteo" />
+    <EntitySet Name="Sugerencias" EntityType="intercambioModel.Sugerencias" />
+    <EntitySet Name="Usuarios" EntityType="intercambioModel.Usuarios" />
+    <AssociationSet Name="FK_Asistencia_IdPart" Association="intercambioModel.FK_Asistencia_IdPart">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Asistencia" EntitySet="Asistencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participantes_IdUsuario" Association="intercambioModel.FK_Participantes_IdUsuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Participantes" EntitySet="Participantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sorteo_IdPart1" Association="intercambioModel.FK_Sorteo_IdPart1">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Sorteo" EntitySet="Sorteo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sorteo_IdPartInter" Association="intercambioModel.FK_Sorteo_IdPartInter">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Sorteo" EntitySet="Sorteo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sugerencias_IdPart" Association="intercambioModel.FK_Sugerencias_IdPart">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Sugerencias" EntitySet="Sugerencias" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Asistencia">
+    <Key>
+      <PropertyRef Name="IdPart" />
+    </Key>
+    <Property Name="IdPart" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Afirmacion" Type="Boolean" />
+    <NavigationProperty Name="Participantes" Relationship="intercambioModel.FK_Asistencia_IdPart" FromRole="Asistencia" ToRole="Participantes" />
+  </EntityType>
+  <EntityType Name="Participantes">
+    <Key>
+      <PropertyRef Name="IdPart" />
+    </Key>
+    <Property Name="IdPart" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Edad" Type="Int32" />
+    <Property Name="Sexo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Grado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Grupo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Area" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Gustos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="OpcionesIntercambio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Asistencia" Relationship="intercambioModel.FK_Asistencia_IdPart" FromRole="Participantes" ToRole="Asistencia" />
+    <NavigationProperty Name="Usuarios" Relationship="intercambioModel.FK_Participantes_IdUsuario" FromRole="Participantes" ToRole="Usuarios" />
+    <NavigationProperty Name="Sorteo" Relationship="intercambioModel.FK_Sorteo_IdPart1" FromRole="Participantes" ToRole="Sorteo" />
+    <NavigationProperty Name="Sorteo1" Relationship="intercambioModel.FK_Sorteo_IdPartInter" FromRole="Participantes" ToRole="Sorteo" />
+    <NavigationProperty Name="Sugerencias" Relationship="intercambioModel.FK_Sugerencias_IdPart" FromRole="Participantes" ToRole="Sugerencias" />
+  </EntityType>
+  <EntityType Name="plantilla_correo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="plantilla" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="asunto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Reglas">
+    <Key>
+      <PropertyRef Name="IdRegla" />
+    </Key>
+    <Property Name="IdRegla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Lugar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Monto" Type="Double" />
+  </EntityType>
+  <EntityType Name="Sorteo">
+    <Key>
+      <PropertyRef Name="IdPart1" />
+      <PropertyRef Name="IdPartInter" />
+    </Key>
+    <Property Name="IdPart1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IdPartInter" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Participantes" Relationship="intercambioModel.FK_Sorteo_IdPart1" FromRole="Sorteo" ToRole="Participantes" />
+    <NavigationProperty Name="Participantes1" Relationship="intercambioModel.FK_Sorteo_IdPartInter" FromRole="Sorteo" ToRole="Participantes" />
+  </EntityType>
+  <EntityType Name="Sugerencias">
+    <Key>
+      <PropertyRef Name="IdSuge" />
+    </Key>
+    <Property Name="IdSuge" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPart" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Participantes" Relationship="intercambioModel.FK_Sugerencias_IdPart" FromRole="Sugerencias" ToRole="Participantes" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TipoUsuario" Type="Int32" />
+    <NavigationProperty Name="Participantes" Relationship="intercambioModel.FK_Participantes_IdUsuario" FromRole="Usuarios" ToRole="Participantes" />
+  </EntityType>
+  <Association Name="FK_Asistencia_IdPart">
+    <End Type="intercambioModel.Participantes" Role="Participantes" Multiplicity="1" />
+    <End Type="intercambioModel.Asistencia" Role="Asistencia" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Asistencia">
+        <PropertyRef Name="IdPart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participantes_IdUsuario">
+    <End Type="intercambioModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="intercambioModel.Participantes" Role="Participantes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Participantes">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sorteo_IdPart1">
+    <End Type="intercambioModel.Participantes" Role="Participantes" Multiplicity="1" />
+    <End Type="intercambioModel.Sorteo" Role="Sorteo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Sorteo">
+        <PropertyRef Name="IdPart1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sorteo_IdPartInter">
+    <End Type="intercambioModel.Participantes" Role="Participantes" Multiplicity="1" />
+    <End Type="intercambioModel.Sorteo" Role="Sorteo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Sorteo">
+        <PropertyRef Name="IdPartInter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sugerencias_IdPart">
+    <End Type="intercambioModel.Participantes" Role="Participantes" Multiplicity="0..1" />
+    <End Type="intercambioModel.Sugerencias" Role="Sugerencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Sugerencias">
+        <PropertyRef Name="IdPart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

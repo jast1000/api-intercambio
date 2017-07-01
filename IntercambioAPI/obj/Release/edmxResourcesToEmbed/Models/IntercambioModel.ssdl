@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="intercambioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Asistencia">
+    <Key>
+      <PropertyRef Name="IdPart" />
+    </Key>
+    <Property Name="IdPart" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Afirmacion" Type="bit" />
+  </EntityType>
+  <EntityType Name="Participantes">
+    <Key>
+      <PropertyRef Name="IdPart" />
+    </Key>
+    <Property Name="IdPart" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="255" />
+    <Property Name="Edad" Type="int" />
+    <Property Name="Sexo" Type="varchar" MaxLength="255" />
+    <Property Name="Grado" Type="varchar" MaxLength="255" />
+    <Property Name="Grupo" Type="varchar" MaxLength="255" />
+    <Property Name="Area" Type="varchar" MaxLength="255" />
+    <Property Name="Gustos" Type="text" />
+    <Property Name="IdUsuario" Type="varchar" MaxLength="255" />
+    <Property Name="OpcionesIntercambio" Type="text" />
+  </EntityType>
+  <EntityType Name="plantilla_correo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="plantilla" Type="text" Nullable="false" />
+    <Property Name="asunto" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reglas">
+    <Key>
+      <PropertyRef Name="IdRegla" />
+    </Key>
+    <Property Name="IdRegla" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lugar" Type="varchar" MaxLength="255" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Monto" Type="float" />
+  </EntityType>
+  <EntityType Name="Sorteo">
+    <Key>
+      <PropertyRef Name="IdPart1" />
+      <PropertyRef Name="IdPartInter" />
+    </Key>
+    <Property Name="IdPart1" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="IdPartInter" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Sugerencias">
+    <Key>
+      <PropertyRef Name="IdSuge" />
+    </Key>
+    <Property Name="IdSuge" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPart" Type="varchar" MaxLength="255" />
+    <Property Name="Descripcion" Type="text" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="TipoUsuario" Type="int" />
+  </EntityType>
+  <Association Name="FK_Asistencia_IdPart">
+    <End Role="Participantes" Type="Self.Participantes" Multiplicity="1" />
+    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Asistencia">
+        <PropertyRef Name="IdPart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participantes_IdUsuario">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Participantes" Type="Self.Participantes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Participantes">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sorteo_IdPart1">
+    <End Role="Participantes" Type="Self.Participantes" Multiplicity="1" />
+    <End Role="Sorteo" Type="Self.Sorteo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Sorteo">
+        <PropertyRef Name="IdPart1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sorteo_IdPartInter">
+    <End Role="Participantes" Type="Self.Participantes" Multiplicity="1" />
+    <End Role="Sorteo" Type="Self.Sorteo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Sorteo">
+        <PropertyRef Name="IdPartInter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sugerencias_IdPart">
+    <End Role="Participantes" Type="Self.Participantes" Multiplicity="0..1" />
+    <End Role="Sugerencias" Type="Self.Sugerencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participantes">
+        <PropertyRef Name="IdPart" />
+      </Principal>
+      <Dependent Role="Sugerencias">
+        <PropertyRef Name="IdPart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="intercambioModelStoreContainer">
+    <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Participantes" EntityType="Self.Participantes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="plantilla_correo" EntityType="Self.plantilla_correo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reglas" EntityType="Self.Reglas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sorteo" EntityType="Self.Sorteo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sugerencias" EntityType="Self.Sugerencias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Asistencia_IdPart" Association="Self.FK_Asistencia_IdPart">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Asistencia" EntitySet="Asistencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participantes_IdUsuario" Association="Self.FK_Participantes_IdUsuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Participantes" EntitySet="Participantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sorteo_IdPart1" Association="Self.FK_Sorteo_IdPart1">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Sorteo" EntitySet="Sorteo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sorteo_IdPartInter" Association="Self.FK_Sorteo_IdPartInter">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Sorteo" EntitySet="Sorteo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sugerencias_IdPart" Association="Self.FK_Sugerencias_IdPart">
+      <End Role="Participantes" EntitySet="Participantes" />
+      <End Role="Sugerencias" EntitySet="Sugerencias" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

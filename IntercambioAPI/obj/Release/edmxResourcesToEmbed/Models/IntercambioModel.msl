@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="intercambioModelStoreContainer" CdmEntityContainer="intercambioEntities">
+    <EntitySetMapping Name="Asistencia">
+      <EntityTypeMapping TypeName="intercambioModel.Asistencia">
+        <MappingFragment StoreEntitySet="Asistencia">
+          <ScalarProperty Name="Afirmacion" ColumnName="Afirmacion" />
+          <ScalarProperty Name="IdPart" ColumnName="IdPart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participantes">
+      <EntityTypeMapping TypeName="intercambioModel.Participantes">
+        <MappingFragment StoreEntitySet="Participantes">
+          <ScalarProperty Name="OpcionesIntercambio" ColumnName="OpcionesIntercambio" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Gustos" ColumnName="Gustos" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+          <ScalarProperty Name="Grado" ColumnName="Grado" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdPart" ColumnName="IdPart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="plantilla_correo">
+      <EntityTypeMapping TypeName="intercambioModel.plantilla_correo">
+        <MappingFragment StoreEntitySet="plantilla_correo">
+          <ScalarProperty Name="asunto" ColumnName="asunto" />
+          <ScalarProperty Name="plantilla" ColumnName="plantilla" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reglas">
+      <EntityTypeMapping TypeName="intercambioModel.Reglas">
+        <MappingFragment StoreEntitySet="Reglas">
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+          <ScalarProperty Name="IdRegla" ColumnName="IdRegla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sorteo">
+      <EntityTypeMapping TypeName="intercambioModel.Sorteo">
+        <MappingFragment StoreEntitySet="Sorteo">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdPartInter" ColumnName="IdPartInter" />
+          <ScalarProperty Name="IdPart1" ColumnName="IdPart1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sugerencias">
+      <EntityTypeMapping TypeName="intercambioModel.Sugerencias">
+        <MappingFragment StoreEntitySet="Sugerencias">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdPart" ColumnName="IdPart" />
+          <ScalarProperty Name="IdSuge" ColumnName="IdSuge" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="intercambioModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

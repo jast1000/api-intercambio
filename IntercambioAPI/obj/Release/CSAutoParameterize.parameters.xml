@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-IntercambioAPI-20170627053833.mdf;Initial Catalog=aspnet-IntercambioAPI-20170627053833;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JAST\\Documents\\Proyectos\\univo\\api-intercambio\\IntercambioAPI\\IntercambioAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="intercambioEntities-Web.config Connection String" description="intercambioEntities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Models.IntercambioModel.csdl|res://*/Models.IntercambioModel.ssdl|res://*/Models.IntercambioModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=jastdb.database.windows.net;initial catalog=intercambio;persist security info=True;user id=jast;password=ch25mi29n?;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JAST\\Documents\\Proyectos\\univo\\api-intercambio\\IntercambioAPI\\IntercambioAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='intercambioEntities']/@connectionString" />
+  </parameter>
+</parameters>
